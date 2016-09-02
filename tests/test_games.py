@@ -12,5 +12,5 @@ class TestGames(unittest.TestCase):
         def rooms_builder():
             return "room builder"
 
-        self.game.setup_game(rooms_builder_func=rooms_builder)
+        self.game.setup_game(rooms_builder=rooms_builder)
         self.assertEqual(self.game.current_room, rooms_builder())
