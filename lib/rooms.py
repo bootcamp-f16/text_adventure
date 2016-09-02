@@ -11,12 +11,25 @@ class Room():
         self.monster = monster
         self.items = items or []
 
+    def draw(self):
+        """
+        Outputs information for the user to be able to
+        visualize the room they are currently in
+        """
+
+        room_output = [
+            self.name,
+            self.description,
+        ]
+
+        return "\n".join(room_output)
+
 def rooms_builder():
     """
     Returns a starting room that contains
     a tree of rooms off the starting room
     """
-    
+
     starting_room = Room(
         name="Starting Point",
         description="This is the first room")

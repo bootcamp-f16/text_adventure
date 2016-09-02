@@ -19,6 +19,17 @@ class TestRooms(unittest.TestCase):
         self.assertEqual(room.monster, {})
         self.assertEqual(room.items, [1,2,3])
 
+    def test_Room_draw(self):
+        room = Room(name="Cuthulu",
+            description="This is a room",
+            monster={},
+            items=[1,2,3])
+        result = [
+            "Cuthulu",
+            "This is a room",
+        ]
+        self.assertEqual(room.draw(), "\n".join(result))
+
     def test_rooms_builder(self):
         room = rooms_builder()
         self.assertIsInstance(room, Room)
