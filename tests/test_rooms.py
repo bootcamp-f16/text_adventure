@@ -24,9 +24,10 @@ class TestRooms(unittest.TestCase):
             description="This is a room",
             monster={},
             items=[1,2,3])
+
         result = [
-            "Cuthulu",
-            "This is a room",
+            "Room: {}".format("Cuthulu"),
+            "\nDescription:\n{}".format("This is a room"),
         ]
         self.assertEqual(room.draw(), "\n".join(result))
 

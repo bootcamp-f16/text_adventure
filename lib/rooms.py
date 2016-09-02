@@ -18,8 +18,8 @@ class Room():
         """
 
         room_output = [
-            self.name,
-            self.description,
+            "Room: {}".format(self.name),
+            "\nDescription:\n{}".format(self.description),
         ]
 
         return "\n".join(room_output)
