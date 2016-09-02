@@ -1,9 +1,11 @@
+from lib.game import Game
 
 def main():
     """
     Main entry point for Github Adventures
     """
-    pass
+    game = Game()
+    game.run()
 
 if __name__ == '__main__':
     main()
