@@ -1,3 +1,4 @@
+import os
 
 class Game():
 
@@ -6,4 +7,6 @@ class Game():
 
 
     def run(self):
-        print("Will be the main game loop")
+        while True:
+            os.system("clear")
+            input(">>>")
