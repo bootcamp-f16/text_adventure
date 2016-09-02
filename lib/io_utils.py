@@ -1,4 +1,5 @@
 import os
+import sys
 
 def clear_screen():
     os.system('clear')
@@ -10,3 +11,6 @@ def draw(contents_to_print=None):
 def prompt():
     print("")
     return input(">>> ")
+
+def exit(code=0):
+    sys.exit(code)
