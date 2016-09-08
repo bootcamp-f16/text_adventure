@@ -18,5 +18,5 @@ def overlord_answer_action(request, response, game):
         response.addOutput("THAT IS CORRECT, YOU WIN!!")
     else:
         game.tries_left -= True
-        request.action_taken = T
+        request.action_taken = True
         response.addOutput("OVERLORD Responds: That answer was incorrect")

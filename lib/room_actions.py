@@ -1,5 +1,11 @@
 from lib.directions import room_directions
 
+def look_action(request, response, game):
+    directions = [direction for direction in game.current_room.rooms.keys()]
+
+    request.action_taken = True
+    response.addOutput("There are rooms to the {}".format(", ".join(directions)))
+
 def move_action(request, response, game):
     direction = request.get_content()
     current_room = game.current_room

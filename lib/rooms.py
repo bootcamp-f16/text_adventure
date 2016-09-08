@@ -24,6 +24,7 @@ class Room():
 
         self.actions = [
             Action('move', take_action=room_actions.move_action),
+            Action('look', take_action=room_actions.look_action),
         ]
 
     def draw(self):
