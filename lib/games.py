@@ -19,6 +19,7 @@ class Game():
         self.should_exit = False
         self.actions = [
             Action('echo', take_action=game_actions.echo_action),
+            Action('help', take_action=game_actions.help_action),
             Action('exit', 'game', take_action=game_actions.exit_action),
         ]
 
