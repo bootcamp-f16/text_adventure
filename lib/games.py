@@ -21,7 +21,7 @@ class Game():
             Action('exit', 'game', take_action=game_actions.exit_action),
         ]
 
-    def setup_game(self, rooms_builder=rooms_builder):
+    def setup_game(self, rooms_builder=rooms_builder, requests=requests):
         r = requests.get("https://api.github.com/orgs/bootcamp-f16/repos")
         repos = r.json()
         self.repo = repos[randint(0, len(repos) - 1)]
