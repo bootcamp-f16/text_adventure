@@ -3,6 +3,7 @@ from lib.requests import Request
 from lib.responses import Response
 from lib.actions import Action
 from lib.io_utils import clear_screen, draw, prompt, exit
+from lib.players import Player
 
 import lib.game_actions as game_actions
 
@@ -18,6 +19,8 @@ class Game():
 
     def setup_game(self, rooms_builder=rooms_builder):
         self.current_room = rooms_builder()
+        self.player = Player()
+        self.tries_left = 3
 
     def set_exit(self):
         self.should_exit = True
@@ -42,6 +45,8 @@ class Game():
             draw("GITHUB ADVENTURES")
             draw("="*60)
             draw(self.current_room.draw())
+            draw("")
+            draw("HEALTH: {}      GUESSES LEFT: {}".format(self.player.health, self.tries_left))
             draw("="*60)
             draw(response.draw())
 
@@ -69,3 +74,11 @@ class Game():
 
             if not request.action_taken:
                 response.addOutput("Invalid input")
+
+            self.check_conditions(request, response)
+
+    def check_conditions(self, request, response):
+        health = self.player.health
+        if health <= 0 or self.tries_left <= 0:
+            self.set_exit()
+            response.addOutput("SORRY YOU LOSE!")

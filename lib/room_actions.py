@@ -13,5 +13,6 @@ def move_action(request, response, game):
         response.addOutput("The is no room to the {}".format(direction))
     else:
         game.current_room = new_room
+        game.player.health -= 10
         request.action_taken = True
         response.addOutput("Moved to the room to the {}".format(direction))
