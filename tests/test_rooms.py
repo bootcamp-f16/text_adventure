@@ -1,6 +1,6 @@
 import unittest
 
-from lib.rooms import Room, rooms_builder
+from lib.rooms import Room, rooms_builder, NORTH, SOUTH, EAST, WEST
 
 class TestRooms(unittest.TestCase):
     def test_Room_init(self):
@@ -30,9 +30,19 @@ class TestRooms(unittest.TestCase):
             "\nDescription:\n{}".format("This is a room"),
         ]
         self.assertEqual(room.draw(), "\n".join(result))
+    
+    def test_Room_add_room(self):
+        starting_room = Room()
+        self.assertIsInstance(starting_room.add_room(NORTH), Room)
+
+        south_room = Room(name="South room")
+
+        self.assertIs(starting_room.add_room(SOUTH, south_room), south_room)
+        self.assertIs(starting_room.rooms[SOUTH], south_room)
 
     def test_rooms_builder(self):
         room = rooms_builder()
         self.assertIsInstance(room, Room)
+
 
 
