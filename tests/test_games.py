@@ -6,6 +6,7 @@ class Request():
 
     def get(self, url):
         return self
+
     def json(self):
         return [
             {

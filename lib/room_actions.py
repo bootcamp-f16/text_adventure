@@ -20,5 +20,6 @@ def move_action(request, response, game):
 
 def investigate_action(request, response, game):
     request.action_taken = True
+    game.player.health -= 5
     letters = [choice(game.repo['name']) for x in range(3)]
     response.addOutput("Three letters of the repo name that I am looking for is {}".format(letters))

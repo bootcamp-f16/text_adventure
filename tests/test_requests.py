@@ -28,3 +28,15 @@ class TestRequest(unittest.TestCase):
 
         request = Request("say hello to my little friend")
         self.assertEqual(request.get_verb(), "say")
+
+    def test_Request_get_content(self):
+        request = Request("")
+        self.assertIsNone(request.get_content())
+        request = Request("exit")
+        self.assertIsNone(request.get_content())
+        
+        request = Request("move north")
+        self.assertEqual(request.get_content(), "north")
+
+        request = Request("say hello to my little friend")
+        self.assertEqual(request.get_content(), "hello to my little friend")
