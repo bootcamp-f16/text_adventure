@@ -29,3 +29,7 @@ class TestGames(unittest.TestCase):
 
         self.game.setup_game(rooms_builder=rooms_builder, requests=Request())
         self.assertEqual(self.game.current_room, rooms_builder())
+        self.assertIsNotNone(self.game.repo)
+        self.assertIsNotNone(self.game.player)
+        self.assertEqual(self.game.player.health, 100)
+        self.assertEqual(self.game.tries_left, 3)
