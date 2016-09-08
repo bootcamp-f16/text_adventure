@@ -1,3 +1,6 @@
+from random import randint
+import requests
+
 from lib.rooms import rooms_builder
 from lib.requests import Request
 from lib.responses import Response
@@ -11,6 +14,7 @@ class Game():
     def __init__(self):
         super().__init__()
         self.current_room = None
+        self.repo = None
         self.should_exit = False
         self.actions = [
             Action('echo', take_action=game_actions.echo_action),
@@ -18,6 +22,9 @@ class Game():
         ]
 
     def setup_game(self, rooms_builder=rooms_builder):
+        r = requests.get("https://api.github.com/orgs/bootcamp-f16/repos", auth=('mattsmith14', 'B3ball14'))
+        repos = r.json()
+        self.repo = repos[randint(0, len(repos) - 1)]
         self.current_room = rooms_builder()
         self.player = Player()
         self.tries_left = 3

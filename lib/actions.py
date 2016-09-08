@@ -6,4 +6,4 @@ class Action():
         self.take_action = take_action
 
     def should_take_action(self, request):
-        return self.verb == request.get_verb()
+        return self.verb.lower() == request.get_verb().lower()

@@ -21,6 +21,7 @@ class Room():
 
         self.actions = [
             Action('move', take_action=room_actions.move_action),
+            Action('investigate', take_action=room_actions.investigate_action),
         ]
 
     def draw(self):
@@ -50,7 +51,7 @@ def rooms_builder():
 
     starting_room = Room(
         name="Starting Point",
-        description="The Github Overlord stares at you out of the corner of the room.")
+        description="The Github Overlord stares at you out of the corner of the room.\nHint: Try to TALK to the Overlord.")
 
     starting_room.npc = Overlord()
 
