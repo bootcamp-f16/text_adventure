@@ -1,4 +1,5 @@
 from random import randint
+from os import environ
 import requests
 
 from lib.rooms import rooms_builder
@@ -21,7 +22,11 @@ class Game():
             Action('exit', 'game', take_action=game_actions.exit_action),
         ]
 
-    def setup_game(self, rooms_builder=rooms_builder, requests=requests):
+    def setup_game(self, rooms_builder=rooms_builder, requests=requests, environ=environ):
+        auth = (
+            environ.get("GITHUB_USER"),
+            environ.get("GITHUB_PASSWORD")
+        )
         r = requests.get("https://api.github.com/orgs/bootcamp-f16/repos")
         repos = r.json()
         self.repo = repos[randint(0, len(repos) - 1)]
@@ -76,6 +81,12 @@ class Game():
             if self.current_room.npc is not None:
                 npc = self.current_room.npc
                 for action in npc.actions:
+                    if(action.should_take_action(request)):
+                        action.take_action(request, response, self)
+
+            if self.current_room.clue is not None:
+                clue = self.current_room.clue
+                for action in clue.actions:
                     if(action.should_take_action(request)):
                         action.take_action(request, response, self)
 

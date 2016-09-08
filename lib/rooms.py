@@ -2,6 +2,7 @@ from lib.actions import Action
 import lib.room_actions as room_actions
 from lib.directions import NORTH, SOUTH, EAST, WEST, room_directions, room_opposite
 from lib.npcs import Overlord
+from lib.clues import LettersClue, FirstLetterClue
 
 class Room():
     def __init__(self,
@@ -10,7 +11,8 @@ class Room():
         monster=None,
         items=None,
         rooms=None,
-        npc=None):
+        npc=None,
+        clue=None):
         
         self.name = name
         self.description = description
@@ -18,10 +20,10 @@ class Room():
         self.items = items or []
         self.rooms = rooms or {}
         self.npc = npc
+        self.clue = clue
 
         self.actions = [
             Action('move', take_action=room_actions.move_action),
-            Action('investigate', take_action=room_actions.investigate_action),
         ]
 
     def draw(self):
@@ -56,9 +58,11 @@ def rooms_builder():
     starting_room.npc = Overlord()
 
     first_room = Room("Room 1", "Room south of starting room")
+    first_room.clue = FirstLetterClue()
     starting_room.add_room(SOUTH, first_room)
 
     second_room = Room("Room 2", "Room south of the first room")
+    second_room.clue = LettersClue()
     first_room.add_room(SOUTH, second_room)
 
     return starting_room
