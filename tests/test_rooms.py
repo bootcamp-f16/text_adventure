@@ -1,6 +1,7 @@
 import unittest
 
-from lib.rooms import Room, rooms_builder, NORTH, SOUTH, EAST, WEST
+from lib.directions import NORTH, SOUTH, EAST, WEST, room_directions
+from lib.rooms import Room, rooms_builder
 
 class TestRooms(unittest.TestCase):
     def test_Room_init(self):

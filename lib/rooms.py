@@ -1,14 +1,6 @@
-NORTH = 'north'
-SOUTH = 'south'
-EAST = 'east'
-WEST = 'west'
-
-room_directions = [
-    NORTH,
-    SOUTH,
-    EAST,
-    WEST,
-]
+from lib.actions import Action
+import lib.room_actions as room_actions
+from lib.directions import NORTH, SOUTH, EAST, WEST, room_directions, room_opposite
 
 class Room():
     def __init__(self,
@@ -23,6 +15,10 @@ class Room():
         self.monster = monster
         self.items = items or []
         self.rooms = rooms or {}
+
+        self.actions = [
+            Action('move', take_action=room_actions.move_action),
+        ]
 
     def draw(self):
         """
@@ -39,6 +35,7 @@ class Room():
 
     def add_room(self, direction, room=None):
         new_room = room or Room()
+        new_room.rooms[room_opposite[direction]] = self
         self.rooms[direction] = new_room
         return new_room
 

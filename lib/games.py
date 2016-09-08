@@ -53,11 +53,15 @@ class Game():
             request = Request(user_input)
             response = Response()
 
-            action_taken = False
             for action in self.actions:
                 if(action.should_take_action(request)):
                     action_taken = True
                     action.take_action(request, response, self)
-            
-            if not action_taken:
+
+            for action in self.current_room.actions:
+                if(action.should_take_action(request)):
+                    action_taken = True
+                    action.take_action(request, response, self)
+
+            if not request.action_taken:
                 response.addOutput("Invalid input")
