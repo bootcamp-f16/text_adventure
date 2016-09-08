@@ -55,13 +55,17 @@ class Game():
 
             for action in self.actions:
                 if(action.should_take_action(request)):
-                    action_taken = True
                     action.take_action(request, response, self)
 
             for action in self.current_room.actions:
                 if(action.should_take_action(request)):
-                    action_taken = True
                     action.take_action(request, response, self)
+
+            if self.current_room.npc is not None:
+                npc = self.current_room.npc
+                for action in npc.actions:
+                    if(action.should_take_action(request)):
+                        action.take_action(request, response, self)
 
             if not request.action_taken:
                 response.addOutput("Invalid input")

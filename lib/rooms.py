@@ -1,6 +1,7 @@
 from lib.actions import Action
 import lib.room_actions as room_actions
 from lib.directions import NORTH, SOUTH, EAST, WEST, room_directions, room_opposite
+from lib.npcs import Overlord
 
 class Room():
     def __init__(self,
@@ -8,13 +9,15 @@ class Room():
         description="",
         monster=None,
         items=None,
-        rooms=None):
+        rooms=None,
+        npc=None):
         
         self.name = name
         self.description = description
         self.monster = monster
         self.items = items or []
         self.rooms = rooms or {}
+        self.npc = npc
 
         self.actions = [
             Action('move', take_action=room_actions.move_action),
@@ -47,7 +50,9 @@ def rooms_builder():
 
     starting_room = Room(
         name="Starting Point",
-        description="This is the first room")
+        description="The Github Overlord stares at you out of the corner of the room.")
+
+    starting_room.npc = Overlord()
 
     first_room = Room("Room 1", "Room south of starting room")
     starting_room.add_room(SOUTH, first_room)
